@@ -34,10 +34,12 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: npm run test
+      # - run: npm run test
 
   deployment:
     production:
       branch: master
-      commands:
-      - ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+      steps:
+        - run:
+          commands:
+          - ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
