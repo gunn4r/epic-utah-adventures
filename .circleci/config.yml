@@ -16,6 +16,9 @@ jobs:
 
     working_directory: ~/repo
 
+    branches:
+      - master
+
     steps:
       - checkout
 
@@ -34,12 +37,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      # - run: npm run test
-
-  deployment:
-    production:
-      branch: master
-      steps:
-        - run:
-          commands:
-          - ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+       - run: npm run test 
+       - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
